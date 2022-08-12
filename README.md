@@ -17,5 +17,5 @@ TP, FN, FP, TN
 137, 24, 107, 358  
 
 # R library
-We implemented this with mada library in R.
+We implemented this with mada library in R.  
 https://cran.r-project.org/web/packages/mada/index.html
