@@ -1,5 +1,5 @@
 # Overview
-To generate Summary ROCs and forest plots for both sensivity and specificity.
+To generate summary ROCs and forest plots for both sensivity and specificity.
 
 # Usage
 `python meta-analysis.py --csvpath test.csv --figdir figs`
