@@ -50,11 +50,21 @@ class metafor():
         r.pdf(self.figdir+'/funnel.pdf')
         r.funnel(rma_analysis)
 
+    def meta_res_funnel(self, type='OR'):
+        '''Funnel plot for odds'''
+        r.assign("type", type)
+        r('meta_escalc <- escalc(measure=type, ai=df_r$TP, bi=df_r$FP, ci=df_r$FN, di=df_r$TN)')
+        r('res <- rma(yi, vi, data=meta_escalc)')
+        regres = r('regtest(res)')
+        r.sink(self.figdir+'/'+'funnel.csv')
+        r.print(regres)
+        r.sink()
 
 def main(args):
     # R meta
     classmeta = metafor(args)
     classmeta.meta_fig_funnel()
+    classmeta.meta_res_funnel()
     classmeta.meta_fig_forest()
 
 
