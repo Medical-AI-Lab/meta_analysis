@@ -52,12 +52,35 @@ class mada():
         r.ROCellipse(self.r_df)
         r.rsSROC(self.r_df, add=True)
 
+    def mada_reitsma_sroc(self):
+        '''Summary ROC part3'''
+        r.pdf(self.figdir+'/'+'reitsmaroc.pdf')
+        res = r.reitsma(self.r_df)
+        summary = r.summary(res)
+        with open(self.figdir+'/'+'reitsmasummary.txt', 'w') as f:
+            print(summary, file=f)
+        f.close()
+        r.ROCellipse(self.r_df)
+        r.plot(res, add=True)
+
+    def mada_phm_sroc(self):
+        '''Summary ROC part4'''
+        r.pdf(self.figdir+'/'+'phmroc.pdf')
+        res = r.phm(self.r_df)
+        summary = r.summary(res)
+        with open(self.figdir+'/'+'phmsummary.txt', 'w') as f:
+            print(summary, file=f)
+        r.ROCellipse(self.r_df)
+        r.plot(res, add=True)
+
 
 def main(args):
     # R mada
     classmada = mada(args)
     classmada.mada_msl_sroc()
     classmada.mada_rs_sroc()
+    classmada.mada_reitsma_sroc()
+    classmada.mada_phm_sroc()
     l_type = ['sens', 'spec']
     for type in l_type:
         classmada.mada_fig_forest(type)
